@@ -17,30 +17,31 @@ class Preferences {
     private Gson gson;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
+
     Preferences(Context context, Data data) {
         this.data = data;
-        sharedPreferences = context.getApplicationContext().getSharedPreferences("preferencesUksap", Context.MODE_PRIVATE);
 
         gson = new Gson();
-        load();
+        sharedPreferences = context.getApplicationContext().getSharedPreferences("preferencesUksap", Context.MODE_PRIVATE);
+
+        loadGroup();
     }
 
     private int selectedGroutInt;
     private String selectedGroupString = "";
 
-    void load() {
-        if (sharedPreferences.contains(selectedGroupString)) {
-            selectedGroutInt = sharedPreferences.getInt(selectedGroupString, 0);
+    void loadGroup() {
+        if (sharedPreferences.contains(getSelectedGroupString())) {
+            selectedGroutInt = sharedPreferences.getInt(getSelectedGroupString(), 0);
         }
     }
 
 
-    void save(int selectedGroup) {
+    void saveGroup(int selectedGroup) {
         editor = sharedPreferences.edit();
         editor.putInt(selectedGroupString, selectedGroup);
         editor.apply();
     }
-
 
 
     boolean loadData() {
@@ -55,7 +56,6 @@ class Preferences {
         editor.putString("data", json);
         editor.apply();
     }
-
 
 
     public int getSelectedGroutInt() {

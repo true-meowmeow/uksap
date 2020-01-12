@@ -37,6 +37,4 @@ class Data implements Constant {
     public void setCells(List<List<String>> cells) {
         this.cells = cells;
     }
-
-
 }

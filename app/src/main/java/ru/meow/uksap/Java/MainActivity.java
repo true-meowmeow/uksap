@@ -16,8 +16,14 @@ import ru.meow.uksap.R;
 
 /*
 
-    на 100 миллисекунд быстрее
-    трассировка ошибок
+    ( ˘⌣˘)    2.0    (˘⌣˘ )
+
+    сохранение пар, приложение можно использовать в оффлайн режиме
+    сильно повышена скорость за счет прекращения постоянных обращений к скрипту, теперь данные хранятся на вашем устройстве
+
+    не знаю, будут ли еще обновления, разве что что-то полетит
+    так потею ради вас, могли бы хоть раз в альшаме накормить
+    кстати, все исходники выложены на github интересно -> ищите
 
 */
 
@@ -58,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements Constant {
 
 
         listeners();
-        //requests.jsonParse();
+
         if (preferences.loadData()) tableUpdater.updateSpinner();
         else requests.jsonParse();
     }
@@ -68,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements Constant {
             @Override
             public void onClick(View v) {
                 tableUpdater.clearTable(true);
-                preferences.load();
+                preferences.loadGroup();
                 requests.jsonParse();
             }
         });
@@ -79,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements Constant {
                 if (data.getCells() != null) {
                     tableUpdater.clearTable(false);
                     tableUpdater.updateTable((Integer) data.getMapGroup().keySet().toArray()[position]);
-                    preferences.save(position);
+                    preferences.saveGroup(position);
                 }
             }
 
