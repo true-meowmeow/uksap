@@ -11,6 +11,7 @@ class Data implements Constant {
     private Map<Integer, String> mapGroup;
 
     String[] createGroup() {
+        System.out.println();
         mapGroup = new LinkedHashMap<>(getCells().get(rowGroup).size()); //int - column number in the table, String - group name
         for (int i = 0; i < getCells().get(rowGroup).size(); i++) {
             if (!getCells().get(rowGroup).get(i).contains("-")) continue;
@@ -36,4 +37,6 @@ class Data implements Constant {
     public void setCells(List<List<String>> cells) {
         this.cells = cells;
     }
+
+
 }

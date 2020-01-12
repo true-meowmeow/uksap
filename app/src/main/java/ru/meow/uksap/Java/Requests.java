@@ -21,9 +21,11 @@ class Requests implements Constant {
     private TableUpdater tableUpdater;
     private Data data;
     private RequestQueue mQueue;
-    Requests(Context context, Data data, TableUpdater tableUpdater) {
+    private Preferences preferences;
+    Requests(Context context, Data data, TableUpdater tableUpdater, Preferences preferences) {
         this.data = data;
         this.tableUpdater = tableUpdater;
+        this.preferences = preferences;
 
         mQueue = Volley.newRequestQueue(context);
     }
@@ -42,7 +44,7 @@ class Requests implements Constant {
                                 }
                             }
                             data.setCells(cells);
-
+                            preferences.saveData(data.getCells());
                             tableUpdater.updateSpinner();
                         } catch (JSONException e) {
                             tableUpdater.requestFailed(String.valueOf(e));

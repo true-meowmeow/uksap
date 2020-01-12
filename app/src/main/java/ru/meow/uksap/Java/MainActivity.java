@@ -52,13 +52,15 @@ public class MainActivity extends AppCompatActivity implements Constant {
 
 
         data = new Data();
-        preferences = new Preferences(context);
+        preferences = new Preferences(context, data);
         tableUpdater = new TableUpdater(context, data, preferences, table, spinnerGroupList, displayMetrics);
-        requests = new Requests(context, data, tableUpdater);
+        requests = new Requests(context, data, tableUpdater, preferences);
 
 
         listeners();
-        requests.jsonParse();
+        //requests.jsonParse();
+        if (preferences.loadData()) tableUpdater.updateSpinner();
+        else requests.jsonParse();
     }
 
     public void listeners() {
